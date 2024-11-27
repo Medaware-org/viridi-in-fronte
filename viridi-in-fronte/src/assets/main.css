@@ -1,3 +1,10 @@
+@import 'base.css';
+@import 'content.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --which-dumb-color-do-you-want-for-this: #ff00ea;
+}
