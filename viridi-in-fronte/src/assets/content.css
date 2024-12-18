@@ -1,9 +1,9 @@
 .header {
     color: white;
-    height: 10rem;
     line-height: 2.5rem;
     width: 100%;
     margin-bottom: 2rem;
+    padding: 5rem 0;
     font-size: xx-large;
     display: flex;
     align-items: center;
@@ -13,14 +13,20 @@
 
 .footer {
     color: white;
-    height: 4rem;
+    height: 3rem;
     width: 100%;
     margin-top: auto;
-    line-height: 2.5rem;
+    line-height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--color-footer);
+}
+
+.nav-bar {
+    background: var(--color-banner);
+    height: 3rem;
+    width: 100%;
 }
 
 .article-ov-container {
