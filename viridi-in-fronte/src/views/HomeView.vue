@@ -1,7 +1,9 @@
+<script setup lang="ts">
+  import ArticleContainer from '@/components/ArticleContainer.vue';
+</script>
+
 <template>
   <main>
-    <h1>
-      Home View
-    </h1>
+    <ArticleContainer/>
   </main>
 </template>

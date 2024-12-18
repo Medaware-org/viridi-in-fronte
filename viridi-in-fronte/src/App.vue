@@ -4,7 +4,9 @@
 </script>
 
 <template>
-  <Header/>
-  <RouterView/>
-  <Footer/>
+  <div class="flex flex-col h-screen">
+    <Header/>
+    <RouterView/>
+    <Footer/>
+  </div>
 </template>

@@ -1,5 +1,10 @@
 <template>
     <div class="header">
-        This is the header 
+        <nav>
+            
+        </nav>
+        <div>
+            Medaware
+        </div>
     </div>
 </template>

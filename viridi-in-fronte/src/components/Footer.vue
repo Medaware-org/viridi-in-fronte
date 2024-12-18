@@ -1,5 +1,5 @@
 <template>
     <div class="footer">
-        this is the ffooter
+        @Medaware
     </div>
 </template>

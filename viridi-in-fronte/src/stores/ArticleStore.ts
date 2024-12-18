@@ -1,8 +1,9 @@
 import { defineStore } from "pinia"
 import type { Article, ArticleOver } from "@/types/article"
 
-export const useArticleSrotre = defineStore('ArticleStore', {
+export const useArticleStore = defineStore('ArticleStore', {
     state: () => ({
+        //articles must be fetchet when app.vue is mounted
         articles: [{id:'test', name:'test', description:'test'}] as Article[]
     }),
     getters: {
@@ -13,6 +14,9 @@ export const useArticleSrotre = defineStore('ArticleStore', {
                     name: article.name
                 }
             })
+        },
+        findById() {
+            return (articleId: string): Article | undefined => this.articles.find(article => article.id = articleId)
         }
     }
 })

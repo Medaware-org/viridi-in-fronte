@@ -6,5 +6,9 @@
 @tailwind utilities;
 
 :root {
-    --which-dumb-color-do-you-want-for-this: #ff00ea;
+    --color-banner: #5856cf;
+    --color-header-1: #5ac4bd;
+    --color-header-2: #5aaec4;
+    --color-bg: #f9f9f9;
+    --color-footer: #1b1b1b;
 }
