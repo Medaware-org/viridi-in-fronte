@@ -1,5 +1,4 @@
 @import 'base.css';
-@import 'content.css';
 
 @tailwind base;
 @tailwind components;
@@ -7,6 +6,7 @@
 
 :root {
     --color-banner: #5856cf;
+    --color-card: #4D4BDF;
     --color-header-1: #5ac4bd;
     --color-header-2: #5aaec4;
     --color-bg: #f9f9f9;

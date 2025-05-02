@@ -1,16 +1,33 @@
 <script setup lang="ts">
   import Header from '@/components/Header.vue'
   import Footer from '@/components/Footer.vue'
-  import NavBar from './components/NavBar.vue';
+  import NavBar from './components/NavBar.vue'
+  import { onMounted } from 'vue'
+
+  const fetchArticles = async () => {
+    const res = fetch("");
+  }
+
+  onMounted(() => {
+
+  })
 </script>
 
 <template>
   <div class="flex flex-col h-screen">
-    <NavBar/>
-    <div class="overflow-y-auto">
+    <div class="header-background">
+      <NavBar/>
       <Header/>
+    </div>
       <RouterView/>
       <Footer/>
-    </div>
   </div>
 </template>
+
+<style lang="css">
+  .header-background {
+    background-image: url("@/assets/background.png");
+    background-color: var(--color-banner);
+    background-size: 250%;
+  }
+</style>

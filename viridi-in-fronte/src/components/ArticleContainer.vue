@@ -1,12 +1,11 @@
 <script setup lang="ts">
     import ArticleDetails from './ArticleDetails.vue';
-    import {useArticleStore} from '@/stores/ArticleStore'
-
-    const articleStore = useArticleStore()
+    //todo: fetch articles
+    //make lit of article details (normal containers for the articles)
 </script>
 
 <template>
     <div>
-        <ArticleDetails v-for="article in articleStore.getArticleOver"/>
+        
     </div>
 </template>
