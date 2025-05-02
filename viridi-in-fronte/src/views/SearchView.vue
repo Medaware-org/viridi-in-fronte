@@ -16,18 +16,15 @@
         if(dropzoneFile.value['type'] !== undefined)
         if(dropzoneFile.value['type'].split('/')[0] === 'image'){
             return URL.createObjectURL(dropzoneFile.value)
-        } else return null
+        } else return 'Upload failed this is no image'
     })
 </script>
 
 <template>
     <div class="dropzone-container">
         <h1 class="h1">This is some warning text which needs to be written</h1>
-        <Dropzone @drop.prevent="drop" @change="selectedFile"/>
-        <span class="file-info">File: {{ dropzoneFile.name }}</span>
+        <Dropzone @drop.prevent="drop" @change="selectedFile" :image="preview"/>
     </div>
-    <img v-if="preview" :src="preview" alt="This should be an image">
-    Dropzone dings type: {{ dropzoneFile['type'] }}
 </template>
 
 <style lang="css">
