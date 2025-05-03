@@ -29,5 +29,6 @@
     background-image: url("@/assets/background.png");
     background-color: var(--color-banner);
     background-size: 250%;
+    box-shadow: 0 4px 10px -2px gray;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="footer">
         <p class="px-4">@Medaware</p>
-        <p class="px-4">Impressum</p>
+        <RouterLink class="px-4" to="/impressum">Impressum</RouterLink>
     </div>
 </template>
 

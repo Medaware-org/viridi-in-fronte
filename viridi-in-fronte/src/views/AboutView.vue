@@ -1,3 +1,3 @@
 <template>
-    this is the about view
+    This is the about view
 </template>
