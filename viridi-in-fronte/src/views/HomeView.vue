@@ -1,5 +1,14 @@
 <script setup lang="ts">
-  import ArticleContainer from '@/components/ArticleContainer.vue'
+  import ArticleContainer from '../components/ArticleContainer.vue'
+  import CatalystApi from "@/api/CatalystApi";
+  import type {TopicResponse} from "@/api/generated";
+  import {onMounted} from "vue";
+
+  onMounted(async () => {
+    let topics = await CatalystApi.instance().topicsApi.getAllTopics()
+    let topicsData = topics.data as TopicResponse[]
+  })
+
   //todo: fetch first half put it in first contaienr
   //fetch second half put it in secon container
   //second container can be removed if not necesarry

@@ -8,7 +8,8 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
+    "type-check": "vue-tsc --build --force",
+    "openapi": "npx @openapitools/openapi-generator-cli generate -i openapi/spec.yaml -g typescript-axios -o src/api/generated"
   },
   "dependencies": {
     "pinia": "^2.2.4",
@@ -16,6 +17,7 @@
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.20.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^20.16.11",
     "@vitejs/plugin-vue": "^5.1.4",

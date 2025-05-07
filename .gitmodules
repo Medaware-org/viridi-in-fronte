@@ -1,0 +1,3 @@
+[submodule "viridi-in-fronte/openapi"]
+	path = viridi-in-fronte/openapi
+	url = git@github.com:Medaware-org/openapi-specification.git
