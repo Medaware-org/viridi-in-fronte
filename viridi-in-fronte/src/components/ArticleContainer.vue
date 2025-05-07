@@ -3,6 +3,13 @@
     import image from '@/assets/TestImage.jpg'
     import image2 from '@/assets/background.png'
     import defaultUser from '@/assets/defaultUser.png'
+    import { onMounted, ref } from 'vue'
+
+    const articles = ref()
+
+    onMounted(() => {
+        
+    })
 </script>
 
 <template>
