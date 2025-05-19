@@ -1,6 +1,5 @@
 .gitignore
 .npmignore
-.openapi-generator-ignore
 api.ts
 base.ts
 common.ts
@@ -23,7 +22,9 @@ docs/GetMetaEntryValueConstraints200ResponseInner.md
 docs/MetadataCreateRequest.md
 docs/MetadataEntry.md
 docs/PublicApi.md
-docs/QueryResponse.md
+docs/RequestGHS200Response.md
+docs/RequestGHS200ResponseScoresInner.md
+docs/RequestOCR200Response.md
 docs/ResourcesApi.md
 docs/StatusApi.md
 docs/TangentialAuthApi.md

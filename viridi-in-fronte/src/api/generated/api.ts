@@ -110,12 +110,6 @@ export interface ArticleResponse {
      * @memberof ArticleResponse
      */
     'id'?: string;
-    /**
-     * 
-     * @type {TopicResponse}
-     * @memberof ArticleResponse
-     */
-    'topic': TopicResponse;
 }
 /**
  * 
@@ -335,27 +329,53 @@ export interface MetadataEntry {
 /**
  * 
  * @export
- * @interface QueryResponse
+ * @interface RequestGHS200Response
  */
-export interface QueryResponse {
+export interface RequestGHS200Response {
     /**
      * 
      * @type {string}
-     * @memberof QueryResponse
+     * @memberof RequestGHS200Response
      */
-    'id': string;
+    'output': string;
+    /**
+     * 
+     * @type {Array<RequestGHS200ResponseScoresInner>}
+     * @memberof RequestGHS200Response
+     */
+    'scores': Array<RequestGHS200ResponseScoresInner>;
+}
+/**
+ * 
+ * @export
+ * @interface RequestGHS200ResponseScoresInner
+ */
+export interface RequestGHS200ResponseScoresInner {
     /**
      * 
      * @type {string}
-     * @memberof QueryResponse
+     * @memberof RequestGHS200ResponseScoresInner
      */
-    'title': string;
+    'class': string;
     /**
      * 
-     * @type {string}
-     * @memberof QueryResponse
+     * @type {number}
+     * @memberof RequestGHS200ResponseScoresInner
      */
-    'author': string;
+    'score': number;
+}
+/**
+ * 
+ * @export
+ * @interface RequestOCR200Response
+ */
+export interface RequestOCR200Response {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof RequestOCR200Response
+     */
+    'data'?: Array<string>;
 }
 /**
  * 
@@ -733,6 +753,36 @@ export const PublicApiAxiosParamCreator = function (configuration?: Configuratio
     return {
         /**
          * 
+         * @summary Get all articles
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllArticles: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/articles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Search the article base
          * @param {string} query Query String
          * @param {*} [options] Override http request option.
@@ -768,6 +818,88 @@ export const PublicApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Perform GHS recognition on the uploaded file
+         * @param {File} file 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestGHS: async (file: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('requestGHS', 'file', file)
+            const localVarPath = `/ghs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Perform OCR on the uploaded file
+         * @param {File} file 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestOCR: async (file: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('requestOCR', 'file', file)
+            const localVarPath = `/ocr`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -780,15 +912,53 @@ export const PublicApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Get all articles
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAllArticles(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ArticleResponse>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllArticles(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PublicApi.getAllArticles']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Search the article base
          * @param {string} query Query String
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async queryArticles(query: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<QueryResponse>>> {
+        async queryArticles(query: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ArticleResponse>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.queryArticles(query, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PublicApi.queryArticles']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Perform GHS recognition on the uploaded file
+         * @param {File} file 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async requestGHS(file: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RequestGHS200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.requestGHS(file, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PublicApi.requestGHS']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Perform OCR on the uploaded file
+         * @param {File} file 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async requestOCR(file: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RequestOCR200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.requestOCR(file, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PublicApi.requestOCR']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -803,13 +973,42 @@ export const PublicApiFactory = function (configuration?: Configuration, basePat
     return {
         /**
          * 
+         * @summary Get all articles
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllArticles(options?: RawAxiosRequestConfig): AxiosPromise<Array<ArticleResponse>> {
+            return localVarFp.getAllArticles(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Search the article base
          * @param {string} query Query String
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        queryArticles(query: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<QueryResponse>> {
+        queryArticles(query: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ArticleResponse>> {
             return localVarFp.queryArticles(query, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Perform GHS recognition on the uploaded file
+         * @param {File} file 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestGHS(file: File, options?: RawAxiosRequestConfig): AxiosPromise<RequestGHS200Response> {
+            return localVarFp.requestGHS(file, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Perform OCR on the uploaded file
+         * @param {File} file 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestOCR(file: File, options?: RawAxiosRequestConfig): AxiosPromise<RequestOCR200Response> {
+            return localVarFp.requestOCR(file, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -823,6 +1022,17 @@ export const PublicApiFactory = function (configuration?: Configuration, basePat
 export class PublicApi extends BaseAPI {
     /**
      * 
+     * @summary Get all articles
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicApi
+     */
+    public getAllArticles(options?: RawAxiosRequestConfig) {
+        return PublicApiFp(this.configuration).getAllArticles(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Search the article base
      * @param {string} query Query String
      * @param {*} [options] Override http request option.
@@ -831,6 +1041,30 @@ export class PublicApi extends BaseAPI {
      */
     public queryArticles(query: string, options?: RawAxiosRequestConfig) {
         return PublicApiFp(this.configuration).queryArticles(query, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Perform GHS recognition on the uploaded file
+     * @param {File} file 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicApi
+     */
+    public requestGHS(file: File, options?: RawAxiosRequestConfig) {
+        return PublicApiFp(this.configuration).requestGHS(file, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Perform OCR on the uploaded file
+     * @param {File} file 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PublicApi
+     */
+    public requestOCR(file: File, options?: RawAxiosRequestConfig) {
+        return PublicApiFp(this.configuration).requestOCR(file, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

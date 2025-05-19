@@ -1,23 +1,19 @@
-# QueryResponse
+# RequestOCR200Response
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | [default to undefined]
-**title** | **string** |  | [default to undefined]
-**author** | **string** |  | [default to undefined]
+**data** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { QueryResponse } from './api';
+import { RequestOCR200Response } from './api';
 
-const instance: QueryResponse = {
-    id,
-    title,
-    author,
+const instance: RequestOCR200Response = {
+    data,
 };
 ```
 
