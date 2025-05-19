@@ -23,7 +23,7 @@
 <template>
     <div class="dropzone-container">
         <h1 class="h1">This is some warning text which needs to be written</h1>
-        <h1>Search for Text</h1>
+        <h1>Search for Hazard Images</h1>
         <Dropzone @drop.prevent="drop" @change="selectedFile" :image="preview"/>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-    const navitems = [{name: "Articles", link: "/"}, {name:"Ai Search", link: "/ai-search"}, {name: 'About Us', link: '/about'}]
+    const navitems = [{name: "Articles", link: "/"}, {name:"Ai Search", link: "/ai-search"}, {name: 'Hazard Search', link:'/hazard-search'}, {name: 'About Us', link: '/about'}]
 </script>
 
 <template>

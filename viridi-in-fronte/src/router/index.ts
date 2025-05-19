@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import SearchView from '@/views/SearchView.vue'
 import ImpressumView from '@/views/ImpressumView.vue'
 import AboutView from '@/views/AboutView.vue'
+import HazardView from '@/views/HazardView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,11 @@ const router = createRouter({
       path: '/ai-search',
       name: 'ai-search',
       component: SearchView
+    },
+    {
+      path: '/hazard-search',
+      name: 'hazard',
+      component: HazardView
     },
     {
       path: '/impressum',
