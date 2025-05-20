@@ -21,7 +21,7 @@
         class="dropzone"
         :class="{ 'active-dropzone': active }"
     >
-        <div v-if="image && image!='Upload failed this is no image'" class="image-container">        
+        <div v-if="image && image!='Upload failed this is no image'" class="image-container">
             <img :src="image" alt="Uploaded Image" class="image">
             <div class="image-text reupload">
                 <span>Re-Upload File via Drag and Drop OR

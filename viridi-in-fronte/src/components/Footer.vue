@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        <p class="px-4">@Medaware</p>
+        <p class="px-4 text-white">@Medaware</p>
         <RouterLink class="px-4" to="/imprint">Imprint</RouterLink>
     </div>
 </template>

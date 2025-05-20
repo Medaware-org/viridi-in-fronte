@@ -12,3 +12,7 @@
     --color-bg: #f9f9f9;
     --color-footer: #1b1b1b;
 }
+
+body {
+    color: #000;
+}

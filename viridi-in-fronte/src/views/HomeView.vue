@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ArticleContainer from '../components/ArticleContainer.vue'
+import {onMounted} from "vue";
 
 //todo: fetch first half put it in first contaienr
 //fetch second half put it in secon container

@@ -6,8 +6,15 @@ import defaultUser from '@/assets/defaultUser.png'
 import {onMounted, ref} from 'vue'
 import CatalystApi from '@/api/CatalystApi'
 import ArticleCard from "@/components/ArticleCard.vue";
+import {toStandardError} from "@/util/ErrorHandling";
+import {useToast} from "primevue";
+import {useArticleStore} from "@/store/articleStore";
+import {useRouter} from "vue-router";
 
 const articles = ref<ArticleResponse[]>([]);
+const toast = useToast()
+const articleStore = useArticleStore()
+const router = useRouter()
 
 async function fetchAllArticles() {
   try {
@@ -15,9 +22,13 @@ async function fetchAllArticles() {
       articles.value = art.data
     })
   } catch (e) {
-    // TODO
-    console.log(e)
+    toast.add(toStandardError(e))
   }
+}
+
+function readArticle(article: ArticleResponse) {
+  articleStore.setArticle(article)
+  router.push(`/article`)
 }
 
 onMounted(() => fetchAllArticles())
@@ -25,8 +36,9 @@ onMounted(() => fetchAllArticles())
 </script>
 
 <template>
-  <div class="card-container">
-    <ArticleCard v-for="art in articles">
+  <div class="card-container text-black">
+    <ArticleCard v-for="art in articles" class="hover:scale-105 transition-all cursor-pointer"
+                 @click="readArticle(art)">
       <template v-slot:card-head>
         <!--url of image shall be changed to the title image of article-->
         <img :src="image2" alt="Dona eis requiem">
