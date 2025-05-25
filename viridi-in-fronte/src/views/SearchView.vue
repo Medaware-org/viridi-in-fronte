@@ -12,6 +12,7 @@ const dropzoneFile = ref<any | null>(null)
 
 const ocrResult = ref<RequestOCR200Response | undefined>(undefined)
 const ghsResult = ref<RequestGHS200Response | undefined>(undefined)
+const toastService = useToast()
 const working = ref(false)
 
 const toast = useToast()
@@ -26,6 +27,15 @@ const drop = (event: any) => {
 
 const selectedFile = () => {
   dropzoneFile.value = (document.querySelector('.dropzoneFile123')! as any).files[0]
+  if (dropzoneFile.value['type'].split("/")[0] !== "image") {
+    toastService.add({
+      severity: "error",
+      summary: "Upload Failed",
+      detail: "Attempted to upload a non-image file",
+    })
+    dropzoneFile.value = null
+    return
+  }
   working.value = true
   try {
     CatalystApi.instance().publicApi.requestGHS(dropzoneFile.value).then(res => {
