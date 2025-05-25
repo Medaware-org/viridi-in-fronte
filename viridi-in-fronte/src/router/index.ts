@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import SearchView from '@/views/SearchView.vue'
 import ImprintView from '@/views/ImprintView.vue'
 import AboutView from '@/views/AboutView.vue'
 import ArticleView from "@/views/ArticleView.vue";
+import ArticlesDashView from "@/views/ArticlesDashView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,7 +11,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: ArticlesDashView
     },
     {
       path: '/ai-search',

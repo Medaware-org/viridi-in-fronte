@@ -5,20 +5,21 @@ import image2 from '@/assets/background.png'
 import defaultUser from '@/assets/defaultUser.png'
 import {onMounted, ref} from 'vue'
 import CatalystApi from '@/api/CatalystApi'
-import ArticleCard from "@/components/ArticleCard.vue";
 import {toStandardError} from "@/util/ErrorHandling";
-import {useToast} from "primevue";
+import {InputText, useToast} from "primevue";
 import {useArticleStore} from "@/store/articleStore";
 import {useRouter} from "vue-router";
+import ArticleCard from "@/components/ArticleCard.vue";
 
 const articles = ref<ArticleResponse[]>([]);
 const toast = useToast()
 const articleStore = useArticleStore()
 const router = useRouter()
+const searchQuery = defineModel<string>()
 
-async function fetchAllArticles() {
+async function loadArticles() {
   try {
-    await CatalystApi.instance().publicApi.getAllArticles().then(art => {
+    await CatalystApi.instance().publicApi.queryArticles(searchQuery.value || "").then(art => {
       articles.value = art.data
     })
   } catch (e) {
@@ -31,13 +32,18 @@ function readArticle(article: ArticleResponse) {
   router.push(`/article`)
 }
 
-onMounted(() => fetchAllArticles())
+onMounted(() => loadArticles())
 
 </script>
 
 <template>
-  <div class="card-container text-black">
-    <ArticleCard v-for="art in articles" class="hover:scale-105 transition-all cursor-pointer"
+  <div class="w-full">
+    <div class="flex flex-row justify-center">
+      <InputText type="text" v-model="searchQuery" placeholder="Search ..." @input="loadArticles()" class="block w-1/2 bg-white mt-8" />
+    </div>
+  </div>
+  <div class="flex flex-row flex-wrap justify-center align-top gap- text-black w-full" v-if="articles.length > 0">
+    <ArticleCard v-for="art in articles" class="hover:scale-105 transition-all cursor-pointer block"
                  @click="readArticle(art)">
       <template v-slot:card-head>
         <!--url of image shall be changed to the title image of article-->
@@ -63,13 +69,6 @@ onMounted(() => fetchAllArticles())
 </template>
 
 <style lang="css">
-.card-container {
-  margin: auto 0;
-  height: fit-content;
-  white-space: nowrap;
-  overflow-x: scroll;
-  overflow-y: hidden;
-}
 
 ::-webkit-scrollbar {
   display: none;

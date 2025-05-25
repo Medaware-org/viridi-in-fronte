@@ -41,7 +41,7 @@
         border-radius: 20px;
         box-shadow: 2px 0px 10px grey;
         float: none;
-        display: inline-block;
+        display: block;
         text-wrap: wrap;
         position: relative;
     }

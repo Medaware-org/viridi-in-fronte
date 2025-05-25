@@ -13,7 +13,9 @@ import {Toast} from "primevue";
       <NavBar/>
       <Header/>
     </div>
-    <RouterView/>
+    <div>
+      <RouterView/>
+    </div>
     <Footer/>
   </div>
 </template>

@@ -2,7 +2,7 @@ import {createApp} from 'vue'
 import {createPinia} from 'pinia'
 
 import PrimeVue from "primevue/config"
-import Lara from "@primeuix/themes/lara";
+import Aura from "@primeuix/themes/aura";
 
 import App from '@/App.vue'
 import router from '@/router'
@@ -16,7 +16,7 @@ CatalystApi.init("http://localhost:8080")
 const app = createApp(App)
         .use(PrimeVue, {
                 theme: {
-                        preset: Lara
+                        preset: Aura
                 }})
         .use(ToastService)
         .use(createPinia())
