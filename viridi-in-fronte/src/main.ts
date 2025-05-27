@@ -11,7 +11,7 @@ import CatalystApi from "@/api/CatalystApi";
 import {ToastService} from "primevue";
 
 // TODO Change this to your local Catalyst server URL
-CatalystApi.init("http://api.medaware.dev")
+CatalystApi.init("https://api.medaware.dev")
 
 const app = createApp(App)
         .use(PrimeVue, {
