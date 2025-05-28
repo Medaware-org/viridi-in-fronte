@@ -438,9 +438,11 @@ const configuration = new Configuration();
 const apiInstance = new TangentialContentApi(configuration);
 
 let selector: string; //Specifies the users whose articles should be listed; User ID for a specified user, \'current\' for the currently logged-in user, or \'all\' for no filtering (default to undefined)
+let query: string; //Search query (optional) (default to undefined)
 
 const { status, data } = await apiInstance.listArticles(
-    selector
+    selector,
+    query
 );
 ```
 
@@ -449,6 +451,7 @@ const { status, data } = await apiInstance.listArticles(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **selector** | [**string**] | Specifies the users whose articles should be listed; User ID for a specified user, \&#39;current\&#39; for the currently logged-in user, or \&#39;all\&#39; for no filtering | defaults to undefined|
+| **query** | [**string**] | Search query | (optional) defaults to undefined|
 
 
 ### Return type

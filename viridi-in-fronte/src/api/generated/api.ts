@@ -110,6 +110,12 @@ export interface ArticleResponse {
      * @memberof ArticleResponse
      */
     'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ArticleResponse
+     */
+    'authorId': string;
 }
 /**
  * 
@@ -476,6 +482,12 @@ export interface TopicResponse {
      * @memberof TopicResponse
      */
     'textColor': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TopicResponse
+     */
+    'isFallback': boolean;
 }
 /**
  * 
@@ -2039,10 +2051,11 @@ export const TangentialContentApiAxiosParamCreator = function (configuration?: C
          * 
          * @summary Get a list of articles written by the specified selector
          * @param {string} selector Specifies the users whose articles should be listed; User ID for a specified user, \&#39;current\&#39; for the currently logged-in user, or \&#39;all\&#39; for no filtering
+         * @param {string} [query] Search query
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listArticles: async (selector: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listArticles: async (selector: string, query?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'selector' is not null or undefined
             assertParamExists('listArticles', 'selector', selector)
             const localVarPath = `/tan/articles/{selector}`
@@ -2057,6 +2070,10 @@ export const TangentialContentApiAxiosParamCreator = function (configuration?: C
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (query !== undefined) {
+                localVarQueryParameter['query'] = query;
+            }
 
 
     
@@ -2297,11 +2314,12 @@ export const TangentialContentApiFp = function(configuration?: Configuration) {
          * 
          * @summary Get a list of articles written by the specified selector
          * @param {string} selector Specifies the users whose articles should be listed; User ID for a specified user, \&#39;current\&#39; for the currently logged-in user, or \&#39;all\&#39; for no filtering
+         * @param {string} [query] Search query
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listArticles(selector: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ArticleResponse>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listArticles(selector, options);
+        async listArticles(selector: string, query?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ArticleResponse>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listArticles(selector, query, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TangentialContentApi.listArticles']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2440,11 +2458,12 @@ export const TangentialContentApiFactory = function (configuration?: Configurati
          * 
          * @summary Get a list of articles written by the specified selector
          * @param {string} selector Specifies the users whose articles should be listed; User ID for a specified user, \&#39;current\&#39; for the currently logged-in user, or \&#39;all\&#39; for no filtering
+         * @param {string} [query] Search query
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listArticles(selector: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ArticleResponse>> {
-            return localVarFp.listArticles(selector, options).then((request) => request(axios, basePath));
+        listArticles(selector: string, query?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ArticleResponse>> {
+            return localVarFp.listArticles(selector, query, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2587,12 +2606,13 @@ export class TangentialContentApi extends BaseAPI {
      * 
      * @summary Get a list of articles written by the specified selector
      * @param {string} selector Specifies the users whose articles should be listed; User ID for a specified user, \&#39;current\&#39; for the currently logged-in user, or \&#39;all\&#39; for no filtering
+     * @param {string} [query] Search query
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TangentialContentApi
      */
-    public listArticles(selector: string, options?: RawAxiosRequestConfig) {
-        return TangentialContentApiFp(this.configuration).listArticles(selector, options).then((request) => request(this.axios, this.basePath));
+    public listArticles(selector: string, query?: string, options?: RawAxiosRequestConfig) {
+        return TangentialContentApiFp(this.configuration).listArticles(selector, query, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **color** | **string** |  | [default to undefined]
 **editable** | **boolean** |  | [default to undefined]
 **textColor** | **string** |  | [default to undefined]
+**isFallback** | **boolean** |  | [default to undefined]
 
 ## Example
 
@@ -24,6 +25,7 @@ const instance: TopicResponse = {
     color,
     editable,
     textColor,
+    isFallback,
 };
 ```
 

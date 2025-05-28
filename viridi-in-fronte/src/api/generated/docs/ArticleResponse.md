@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **title** | **string** |  | [default to undefined]
 **date** | **string** |  | [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
+**authorId** | **string** |  | [default to undefined]
 
 ## Example
 
@@ -20,6 +21,7 @@ const instance: ArticleResponse = {
     title,
     date,
     id,
+    authorId,
 };
 ```
 
